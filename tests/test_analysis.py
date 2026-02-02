@@ -1,12 +1,10 @@
 import unittest
-from src.analysis import calculate_basic_stats
+from src.analysis import calculate_basic_stats, perform_linear_fit
 
 class TestAnalysis(unittest.TestCase):
     
     def test_calculate_stats(self):
-        # We test with simple numbers: 1, 2, 3
-        # Mean should be 2.0
-        # Std Dev (population) of [1,2,3] is 0.816...
+        # Test mean and std dev
         data = [1, 2, 3]
         stats = calculate_basic_stats(data)
         
@@ -14,9 +12,20 @@ class TestAnalysis(unittest.TestCase):
         self.assertAlmostEqual(stats['std_dev'], 0.81649658, places=5)
 
     def test_empty_data(self):
-        # Test if it handles empty lists safely
+        # Test empty input safety
         result = calculate_basic_stats([])
         self.assertIsNone(result)
+
+    def test_linear_fit(self):
+        # Test linear regression (y = 2x + 1)
+        x = [1, 2, 3]
+        y = [3, 5, 7] 
+        
+        result = perform_linear_fit(x, y)
+        
+        # Check slope (m=2) and intercept (q=1)
+        self.assertAlmostEqual(result['slope'], 2.0, places=5)
+        self.assertAlmostEqual(result['intercept'], 1.0, places=5)
 
 if __name__ == '__main__':
     unittest.main()

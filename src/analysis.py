@@ -17,3 +17,24 @@ def calculate_basic_stats(data):
         "mean": np.mean(data),
         "std_dev": np.std(data)
     }
+def perform_linear_fit(x_data, y_data):
+    """
+    Performs a linear regression (y = mx + q).
+    
+    Args:
+        x_data (array-like): Independent variable.
+        y_data (array-like): Dependent variable.
+        
+    Returns:
+        dict: Slope (m) and Intercept (q).
+    """
+    if len(x_data) != len(y_data) or len(x_data) == 0:
+        return None
+        
+    # Fit a polynomial of degree 1 (Linear)
+    slope, intercept = np.polyfit(x_data, y_data, 1)
+    
+    return {
+        "slope": slope,
+        "intercept": intercept
+    }
