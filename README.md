@@ -10,6 +10,20 @@ A simple Python toolkit for basic scientific data analysis, including:
 This project is intended as a learning-oriented scientific analysis framework.
 
 ---
+## Design Philosophy
+
+This project is intentionally designed as a minimal but extensible scientific
+analysis framework. The focus is on reproducible research practices, including:
+
+- modular code organization
+- automated testing
+- clear documentation
+- version control transparency
+
+Rather than feature complexity, the project emphasizes correctness,
+readability, and extensibility, which are essential for scientific computing
+at the graduate level.
+
 
 ## Features
 
@@ -35,5 +49,10 @@ To run the example analysis and visualization:
 
 ```bash
 python src/main.py
+---
+## Reproducibility
+
+All analyses in this project can be reproduced by installing the listed
+dependencies and running the provided test suite and main script.
 
 
