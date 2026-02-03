@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 def calculate_basic_stats(data):
     """
@@ -38,3 +40,10 @@ def perform_linear_fit(x_data, y_data):
         "slope": slope,
         "intercept": intercept
     }
+
+def plot_data(x, y):
+    plt.scatter(x, y)
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.title("Scientific Data Plot")
+    plt.show()
