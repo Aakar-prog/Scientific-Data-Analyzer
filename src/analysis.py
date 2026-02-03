@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def calculate_basic_stats(data):
+def calculate_basic_stats(data: np.ndarray) -> Dict[str, float]:
+
     """
     Calculates mean and standard deviation of a dataset.
     
@@ -19,7 +20,8 @@ def calculate_basic_stats(data):
         "mean": np.mean(data),
         "std_dev": np.std(data)
     }
-def perform_linear_fit(x_data, y_data):
+def perform_linear_fit(x_data: np.ndarray, y_data: np.ndarray) -> Dict[str, float]:
+
     """
     Performs a linear regression (y = mx + q).
     
@@ -40,6 +42,7 @@ def perform_linear_fit(x_data, y_data):
         "slope": slope,
         "intercept": intercept
     }
+# Plotting the graph
 
 def plot_data(x, y):
     plt.scatter(x, y)
