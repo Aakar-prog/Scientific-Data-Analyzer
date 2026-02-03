@@ -1,3 +1,7 @@
+
+import numpy as np
+import csv
+
 def load_csv(filepath):
     x = []
     y = []
