@@ -26,7 +26,14 @@ This project is intended as a learning-oriented scientific analysis framework.
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/scientific-data-analyzer.git
+git clone https://github.com/Aakar-prog/Scientific-Data-Analyzer.git
 cd scientific-data-analyzer
 ific Data Analyzer
+## Running the Analyzer
+
+To run the example analysis and visualization:
+
+```bash
+python src/main.py
+
 
