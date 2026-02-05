@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Dict
+from src.analysis import perform_linear_fit, perform_polynomial_fit
+
 
 
 
