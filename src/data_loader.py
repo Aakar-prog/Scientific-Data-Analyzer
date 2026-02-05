@@ -9,12 +9,16 @@ def load_csv(filepath):
         reader = csv.reader(f)
 
         for row in reader:
-            # skip empty or malformed rows
             if not row or len(row) < 2:
                 continue
 
-            x.append(float(row[0].strip()))
-            y.append(float(row[1].strip()))
+            try:
+                x.append(float(row[0].strip()))
+                y.append(float(row[1].strip()))
+            except ValueError:
+                # Skip header or non-numeric rows
+                continue
 
     return np.array(x), np.array(y)
+
 
