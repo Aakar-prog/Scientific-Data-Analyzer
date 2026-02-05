@@ -44,6 +44,33 @@ def perform_linear_fit(x_data: np.ndarray, y_data: np.ndarray) -> Dict[str, floa
         "slope": slope,
         "intercept": intercept
     }
+def perform_polynomial_fit(
+    x_data: np.ndarray,
+    y_data: np.ndarray,
+    degree: int = 2
+) -> np.ndarray:
+    """
+    Perform polynomial regression of given degree.
+
+    Parameters
+    ----------
+    x_data : np.ndarray
+        Independent variable.
+    y_data : np.ndarray
+        Dependent variable.
+    degree : int
+        Degree of the polynomial.
+
+    Returns
+    -------
+    np.ndarray
+        Polynomial coefficients (highest power first).
+    """
+    if degree < 1:
+        raise ValueError("Polynomial degree must be >= 1")
+
+    return np.polyfit(x_data, y_data, degree)
+
 # Plotting the graph
 
 def plot_data(x, y):
@@ -52,3 +79,5 @@ def plot_data(x, y):
     plt.ylabel("Y")
     plt.title("Scientific Data Plot")
     plt.show()
+
+
