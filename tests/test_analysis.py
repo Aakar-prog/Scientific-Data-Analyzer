@@ -1,5 +1,5 @@
 import unittest
-from src.analysis import calculate_basic_stats, perform_linear_fit
+from src.analysis import calculate_basic_stats, perform_linear_fit, perform_polynomial_fit
 
 class TestAnalysis(unittest.TestCase):
     
@@ -29,3 +29,15 @@ class TestAnalysis(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+    def test_polynomial_fit_quadratic():
+    """
+    Test polynomial fitting for a simple quadratic function y = x^2
+    """
+    x = np.array([0, 1, 2, 3])
+    y = np.array([0, 1, 4, 9])
+
+    coeffs = perform_polynomial_fit(x, y, degree=2)
+
+    # A quadratic polynomial must have 3 coefficients
+    assert len(coeffs) == 3
