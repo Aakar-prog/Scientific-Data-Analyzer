@@ -2,10 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import Dict
 
-
-
-
-
 def calculate_basic_stats(data: np.ndarray) -> Dict[str, float]:
 
     """
@@ -72,6 +68,30 @@ def perform_polynomial_fit(
         raise ValueError("Polynomial degree must be >= 1")
 
     return np.polyfit(x_data, y_data, degree)
+
+# Implementing manual linear regression model
+
+def perform_linear_fit_manual(x: np.ndarray, y: np.ndarray) -> dict:
+    """
+    Linear regression using the normal equation:
+        theta = (X^T X)^(-1) X^T y
+    """
+
+    # Convert to column vectors
+    x = np.asarray(x)
+    y = np.asarray(y)
+
+    # Design matrix [1, x]
+    X = np.column_stack((np.ones(len(x)), x))
+
+    # Normal equation
+    theta = np.linalg.inv(X.T @ X) @ X.T @ y
+
+    intercept = theta[0]
+    slope = theta[1]
+
+    return {"slope": slope, "intercept": intercept}
+
 
 # Plotting the graph
 
