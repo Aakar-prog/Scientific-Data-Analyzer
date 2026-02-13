@@ -102,4 +102,23 @@ def plot_data(x, y):
     plt.title("Scientific Data Plot")
     plt.show()
 
+    # ---------------------------
+# Model evaluation metrics
+# ---------------------------
+def evaluate_fit(y_true, y_pred):
+    """
+    Compute error metrics for model evaluation.
+    Returns Mean Squared Error (MSE) and R² score.
+    """
+    import numpy as np
+
+    mse = np.mean((y_true - y_pred) ** 2)
+
+    ss_total = np.sum((y_true - np.mean(y_true)) ** 2)
+    ss_residual = np.sum((y_true - y_pred) ** 2)
+    r2 = 1 - (ss_residual / ss_total)
+
+    return {"mse": mse, "r2": r2}
+
+
 
