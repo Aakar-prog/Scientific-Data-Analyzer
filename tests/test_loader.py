@@ -1,31 +1,41 @@
 import os
+import unittest
 import numpy as np
 import pandas as pd
 
 from src.data_loader import load_csv
 
 
-def test_load_csv_success():
-    test_file = "test_data.csv"
+class TestLoader(unittest.TestCase):
+    """Tests for CSV loading functionality."""
 
-    # create test CSV with header
-    df = pd.DataFrame({"col1": [1, 2], "col2": [3, 4]})
-    df.to_csv(test_file, index=False)
+    def test_load_csv_success(self):
+        """CSV should load correctly and return numpy arrays."""
 
-    x, y = load_csv(test_file)
+        test_file = "test_data.csv"
 
-    assert isinstance(x, np.ndarray)
-    assert isinstance(y, np.ndarray)
-    assert len(x) == 2
-    assert len(y) == 2
+        # Create temporary CSV
+        df = pd.DataFrame({"col1": [1, 2], "col2": [3, 4]})
+        df.to_csv(test_file, index=False)
 
-    os.remove(test_file)
+        x, y = load_csv(test_file)
+
+        self.assertIsInstance(x, np.ndarray)
+        self.assertIsInstance(y, np.ndarray)
+        self.assertEqual(len(x), 2)
+        self.assertEqual(len(y), 2)
+
+        os.remove(test_file)
+
+    def test_file_not_found(self):
+        """Invalid path should raise FileNotFoundError."""
+
+        with self.assertRaises(FileNotFoundError):
+            load_csv("non_existent_file.csv")
 
 
-def test_file_not_found():
-    try:
-        load_csv("non_existent_file.csv")
-        assert False
-    except FileNotFoundError:
-        assert True
+if __name__ == "__main__":
+    unittest.main()
+
+
 
