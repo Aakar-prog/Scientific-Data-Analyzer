@@ -5,6 +5,15 @@ import matplotlib.pyplot as plt
 from src.data_loader import load_csv
 from src.analysis import perform_linear_fit, perform_polynomial_fit, perform_linear_fit_manual, evaluate_fit
 
+#--------------------------------------------------------------------------------------
+# Program workflow:
+# 1. Load dataset from CSV
+# 2. Choose regression model (linear or polynomial)
+# 3. Compute model parameters
+# 4. Evaluate model performance
+# 5. Visualize results
+#---------------------------------------------------------------------------------------
+
 def main():
     parser = argparse.ArgumentParser(description="Scientific Data Analyzer")
 
@@ -55,7 +64,7 @@ def main():
 
         # Evaluate the polynomial regression model by comparing predicted values (computed from polynomial coefficients)
         #  with the original observed data using MSE and R² metrics.
-        
+
         metrics = evaluate_fit(y, np.polyval(coeffs, x))
         print("\nModel performance:")
         print(f"MSE: {metrics['mse']:.4f}")

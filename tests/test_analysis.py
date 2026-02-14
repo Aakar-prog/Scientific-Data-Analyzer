@@ -2,8 +2,17 @@ import unittest
 import numpy as np
 from src.analysis import perform_linear_fit, perform_polynomial_fit
 
+#-----------------------------------------------------------------------
+# Unit tests for regression analysis functions.
+# These tests verify correctness of parameter estimation
+# and expected output structure.
+#............................................................................
 
 class TestAnalysis(unittest.TestCase):
+
+    # Verify linear regression recovers exact parameters
+    # for a perfectly linear dataset: y = 2x + 1
+
 
     def test_linear_fit(self):
         x = [1, 2, 3]
@@ -16,8 +25,11 @@ class TestAnalysis(unittest.TestCase):
 
     def test_polynomial_fit(self):
         """
-        Test polynomial fitting for a simple quadratic function y = x^2
+        Check that polynomial regression identifies correct model degree
+        and returns expected number of coefficients.
+        
         """
+
         x = np.array([0, 1, 2, 3])
         y = np.array([0, 1, 4, 9])
 

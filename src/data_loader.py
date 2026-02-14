@@ -1,6 +1,8 @@
 import csv
 import numpy as np
 
+# Load CSV file assuming two numeric columns: x and y
+
 def load_csv(filepath):
     x = []
     y = []

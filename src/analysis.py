@@ -48,7 +48,7 @@ def perform_polynomial_fit(
     degree: int = 2
 ) -> np.ndarray:
     """
-    Perform polynomial regression of given degree.
+    # Perform polynomial regression of given degree.
 
     Parameters
     ----------
@@ -69,7 +69,12 @@ def perform_polynomial_fit(
 
     return np.polyfit(x_data, y_data, degree)
 
-# Implementing manual linear regression model
+#----------------------------------------------------------------------------
+# Manual linear regression using the Normal Equation:
+# θ = (XᵀX)^(-1) Xᵀ y
+# This implementation estimates slope and intercept without using NumPy's
+# high-level fitting routines, allowing comparison with np.polyfit().
+#------------------------------------------------------------------------------
 
 def perform_linear_fit_manual(x: np.ndarray, y: np.ndarray) -> dict:
     """
@@ -102,18 +107,18 @@ def plot_data(x, y):
     plt.title("Scientific Data Plot")
     plt.show()
 
-    # ---------------------------
+# -------------------------------------------------------
 # Model evaluation metrics
-# ---------------------------
+# Computes prediction error and goodness of fit
+# -------------------------------------------------------
+
+
 def evaluate_fit(y_true, y_pred):
     """
     Compute error metrics for model evaluation.
     Returns Mean Squared Error (MSE) and R² score.
     """
-    import numpy as np
-
     mse = np.mean((y_true - y_pred) ** 2)
-
     ss_total = np.sum((y_true - np.mean(y_true)) ** 2)
     ss_residual = np.sum((y_true - y_pred) ** 2)
     r2 = 1 - (ss_residual / ss_total)
