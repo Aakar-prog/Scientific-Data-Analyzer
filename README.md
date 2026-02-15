@@ -1,151 +1,226 @@
-Scientific Data Analyzer
-Programming Project for Course Assessment
+# Scientific Data Analyzer
 
-Evaluation method: Public Git repository, documented source code, executable tests
+This project implements a reproducible workflow for quantitative analysis of experimental datasets using regression techniques.
 
-1. Project Description
+The program reads numerical data from CSV files, fits analytical models to the observations, evaluates the goodness of fit, and visualizes the results.  
+Two independent implementations of linear regression are provided: an analytical least-squares solution and a numerical polynomial fitting routine. Their agreement is used to validate the correctness of the model implementation.
 
-This repository contains a Python programming project developed for academic assessment.
-The project analyzes numerical datasets using regression techniques and demonstrates:
+The software demonstrates fundamental steps commonly encountered in scientific data analysis:
 
-. structured source code,
+- data loading and validation
+- model fitting
+- statistical evaluation of fit quality
+- graphical inspection of results
+- automated testing of numerical routines
 
-. meaningful version control usage,
 
-. executable automated tests.
+---
 
-The project is fully hosted on a public Git repository and developed using Git.
+## Features
 
-2. Repository Structure
+* Load numerical data from CSV files
+* Perform **Linear Regression**
 
+  * NumPy implementation
+  * Manual implementation (Normal Equation)
+* Perform **Polynomial Regression**
+* Compute model performance metrics
+
+  * Mean Squared Error (MSE)
+  * Coefficient of Determination (R²)
+* Plot raw data and fitted models
+* Unit tests for analysis and data loading modules
+
+## Verification Methodology
+
+To validate the regression module, two independent implementations of linear regression were compared:
+
+1. **Manual method (Normal Equation)**  
+θ = (XᵀX)⁻¹ Xᵀy  
+Derived directly from least-squares theory and used as a reference solution.
+
+2. **NumPy method (`numpy.polyfit`)**  
+Uses optimized numerical routines for stability and performance.
+
+For the same dataset, both methods produce nearly identical slope and intercept values, confirming correctness of the implementation.
+
+Model performance is additionally evaluated using:
+- Mean Squared Error (MSE)
+- Coefficient of Determination (R²)
+
+The manual model validates mathematical correctness, while the NumPy model represents practical scientific usage.
+
+---
+
+## Project Structure
+
+```
 Scientific-Data-Analyzer/
 │
 ├── src/
-│   ├── __init__.py
-│   ├── data_loader.py
-│   ├── analysis.py
-│   └── main.py
+│   ├── data_loader.py      # CSV loading utility
+│   ├── analysis.py         # Regression algorithms & evaluation
+│   └── main.py             # Command line interface
 │
 ├── tests/
-│   ├── __init__.py
-│   ├── test_loader.py
-│   └── test_analysis.py
+│   ├── test_analysis.py    # Regression tests
+│   └── test_loader.py      # CSV loader tests
 │
-├── example.csv
+├── example.csv             # Example dataset
 ├── requirements.txt
-├── README.md
-└── LICENSE
+└── README.md
+```
 
-# Design choices:
+---
 
-. data_loader.py: data input and validation
+## Installation
 
-. analysis.py: numerical computation (linear and polynomial regression)
+Clone the repository:
 
-. main.py: command-line interface and plotting
+```
+git clone <repository-url>
+cd Scientific-Data-Analyzer
+```
 
-. tests/: automated test routines
+Install dependencies:
 
-# Version Control and Commit History (6 points)
+```
+pip install -r requirements.txt
+```
 
-The project was developed incrementally using Git.
+---
 
-The commit history:
+## Usage
 
-. follows a clear convention (feat, fix, test, docs, refactor)
+### Linear regression (NumPy)
 
-. groups logically related changes
+```
+python -m src.main --file example.csv --model linear --method numpy
+```
 
-. documents the evolution of the project step by step
+### Linear regression (Manual implementation)
 
-Example commit messages:
+```
+python -m src.main --file example.csv --model linear --method manual
+```
 
-. feat: add polynomial regression model
+### Polynomial regression
 
-. test: add unit tests for analysis functions
+```
+python -m src.main --file example.csv --model polynomial --degree 2
+```
 
-. fix: make CSV loader robust to malformed rows
+---
 
-. docs: update README with execution instructions
+## Output
 
-This ensures clarity of repository commit history, as required.
+The program will:
 
-4. Data Input
+1. Load the dataset
+2. Fit the selected model
+3. Display model performance:
 
-Input data is provided as a CSV file containing numerical (x, y) pairs.
+```
+Model performance:
+MSE: <value>
+R² : <value>
+```
 
-Example (example.csv):
-0,0
-1,1
-2,4
-3,9
-4,16
+4. Display a graph containing data points and fitted curve
 
-2. Implemented Methods
+---
 
-# Linear Regression (Baseline Model)
+## Screenshots
 
-A linear regression model is implemented as a baseline hypothesis.
-It estimates slope and intercept and provides a simple reference for comparison.
+### Linear Regression (Manual Method)
 
-# Polynomial Regression (Extended Model)
+![Linear regression result](images/manual_fit.png)
 
-Polynomial regression generalizes the linear model by allowing higher-order terms.
+---
 
-Features:
+### Linear Regression (NumPy Method)
 
-user-defined polynomial degree
+![Linear regression result](images/linear_fit.png)
 
-smooth curve evaluation on a dense grid
 
-linear regression is a special case (degree = 1)
+---
 
-This demonstrates extension from a simple to a more complex model.
+### Polynomial Regression
 
-#  Program Execution
+![Polynomial regression result](images/polynomial_fit.png)
 
-. Linear Model
-python -m src.main --file example.csv --model linear
+---
 
-. Polynomial Model
-python -m src.main --file example.csv --model poly --degree 2
+### Model Performance Metrics
 
-The program:
 
-. loads data,
+![Model evaluation metrics](images/metrics_output.png)
 
-. performs regression,
+---
 
-. produces a plot comparing data and fitted model.
 
-# Automated Tests
+## Model Evaluation
 
-Automated tests are provided using pytest
+The program evaluates the quality of the fit using:
 
-python -m pytest
+* **Mean Squared Error (MSE)**
+  Measures the average squared difference between predictions and true values.
 
-# Test coverage includes:
+* **R² Score**
+  Measures how well the model explains variance in the data (1 = perfect fit).
 
-. CSV loading correctness
+---
 
-. linear regression correctness
+## Manual vs NumPy Linear Regression
 
-. polynomial regression behavior
+Both implementations produce the same mathematical result:
 
-All tests are:
+| Method | Description                                   |
+| ------ | --------------------------------------------- |
+| Manual | Uses Normal Equation: θ = (XᵀX)⁻¹Xᵀy          |
+| NumPy  | Uses `numpy.polyfit` optimized implementation |
 
-executable,
+Conclusion:
+The manual implementation validates the mathematical correctness, while NumPy provides better numerical stability and performance.
 
-isolated,
+---
 
-reproducible.
+## Running Tests
 
-# Conclusion
+Run all unit tests:
 
-This project satisfies all mandatory assessment criteria:
+```
+python -m unittest discover tests
+```
 
-clarity of repository and commits
+Expected output:
 
-completeness of documentation and code
+```
+....
+----------------------------------------------------------------------
+Ran tests in X.XXXs
 
-presence and executability of tests
+OK
+```
+
+---
+
+## Code Design Principles
+
+* Modular structure (separation of CLI, analysis, and I/O)
+* Clear documentation and comments
+* Reproducible results
+* Automated testing
+* Readable and maintainable code
+
+---
+
+## Author
+
+Aakarshan Khatiwoda — Software and computing for applied physics
+
+---
+
+## License
+
+This project is for educational purposes.
